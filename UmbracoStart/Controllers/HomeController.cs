@@ -11,6 +11,11 @@ namespace UmbracoStart.Controllers
     {
         private const string PARTIAL_VIEW_FOLDER = "~/Views/Partials/Home/";
 
+        public ActionResult RenderIntro()
+        {
+            return PartialView(PARTIAL_VIEW_FOLDER + "_Intro.cshtml");
+        }
+
         public ActionResult RenderFeatured()
         {
             return PartialView(PARTIAL_VIEW_FOLDER + "_Featured.cshtml");
