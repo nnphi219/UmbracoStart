@@ -14,7 +14,12 @@ namespace UmbracoStart.Controllers
     public class SiteLayoutController : SurfaceController
     {
         private const string PARTIAL_VIEW_FOLDER = "~/Views/Partials/SiteLayout/";
-        
+
+        public ActionResult RenderTitleControls()
+        {
+            return PartialView(PARTIAL_VIEW_FOLDER + "_TitleControls.cshtml");
+        }
+
         public ActionResult RenderFooter()
         {
             return PartialView(PARTIAL_VIEW_FOLDER + "_Footer.cshtml");

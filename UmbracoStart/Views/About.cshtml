@@ -6,17 +6,7 @@
 
 <div id="fh5co-about-section">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
-					<h2>@( (Umbraco.AssignedContentItem.HasProperty("title") 
-                            && Umbraco.AssignedContentItem.GetPropertyValue("title") != null
-                            && !string.IsNullOrEmpty(Umbraco.AssignedContentItem.GetPropertyValue("title").ToString())) 
-                                ? Umbraco.AssignedContentItem.GetPropertyValue("title") 
-                                : Umbraco.AssignedContentItem.Name )
-                    </h2>
-					<p><span>Created with <i class="sl-icon-heart"></i> by the fine folks at <a href="http://freehtml5.co">FreeHTML5.co</a></span></p>
-				</div>
-			</div>
+			@{ Html.RenderAction("RenderTitleControls", "SiteLayout"); }
 			<div class="row">
 				<div class="col-md-8">
 					<div class="row">
