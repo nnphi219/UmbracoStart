@@ -3,9 +3,9 @@
 	Layout = "WebBase.cshtml";
 }
 
-<div id="fh5co-blog-section">
-    <div class="container">
+<div id="fh5co-about-section">
+    <div class="container about-inner">
         @{ Html.RenderAction("RenderTitleControls", "SiteLayout"); }
-        @{ Html.RenderAction("RenderPostList", "Blog"); }
+        @CurrentPage.GetGridHtml("contentGrid", "bootstrap3")
     </div>
 </div>
