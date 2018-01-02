@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web.Mvc;
 using Umbraco.Web.Mvc;
-using System.Web.Mvc;
+using UmbracoStart.Models;
+using System.Collections.Generic;
+using Umbraco.Web;
+using Umbraco.Core.Models;
+using System.Linq;
+using Archetype.Models;
 
 namespace UmbracoStart.Controllers
 {
@@ -18,7 +20,26 @@ namespace UmbracoStart.Controllers
 
         public ActionResult RenderFeatured()
         {
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Featured.cshtml");
+            List<FeaturedItem> model = new List<FeaturedItem>();
+            IPublishedContent homePage = CurrentPage.AncestorOrSelf(1).DescendantsOrSelf().Where(x => x.DocumentTypeAlias == "home").FirstOrDefault();
+            ArchetypeModel featuredItems = homePage.GetPropertyValue<ArchetypeModel>("featuredItems");
+
+            foreach (ArchetypeFieldsetModel fieldset in featuredItems)
+            {
+                var mediaItem = fieldset.GetValue<IPublishedContent>("image");
+                //int imageId = fieldset.GetValue<int>("image");
+                //var mediaItem = Umbraco.Media(imageId);
+                string imageUrl = mediaItem.Url;
+
+                //int pageId = fieldset.GetValue<int>("page");
+                //IPublishedContent linkedToPage = Umbraco.TypedContent(pageId);
+                var linkedToPage = fieldset.GetValue<IPublishedContent>("page");
+                string linkUrl = linkedToPage.Url;
+
+                model.Add(new FeaturedItem(fieldset.GetValue<string>("name"), fieldset.GetValue<string>("category"), imageUrl, linkUrl));
+            }
+
+            return PartialView(PARTIAL_VIEW_FOLDER + "_Featured.cshtml", model);
         }
 
         public ActionResult RenderServices()
