@@ -399,6 +399,8 @@
     <Compile Include="Controllers\SiteLayoutController.cs" />
     <Compile Include="Models\BlogPreview.cs" />
     <Compile Include="Models\FeaturedItem.cs" />
+    <Compile Include="Models\TestimonialsModel.cs" />
+    <Compile Include="Models\LatestBlogPosts.cs" />
     <Compile Include="Models\NavigationLink.cs" />
     <Compile Include="Models\NavigationListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

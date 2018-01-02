@@ -49,12 +49,24 @@ namespace UmbracoStart.Controllers
 
         public ActionResult RenderBlog()
         {
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Blog.cshtml");
-        }
+            IPublishedContent homepage = CurrentPage.AncestorOrSelf("home");
+            string title = homepage.GetPropertyValue<string>("latestBlogPostsTitle");
+            string introduction = homepage.GetPropertyValue("latestBlogPostsIntroduction").ToString();
+
+            LatestBlogPosts model = new LatestBlogPosts(title, introduction);
+
+            return PartialView(PARTIAL_VIEW_FOLDER + "_Blog.cshtml", model);
+        } 
 
         public ActionResult RenderClients()
         {
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Clients.cshtml");
+            IPublishedContent homepage = CurrentPage.AncestorOrSelf("home");
+            string title = homepage.GetPropertyValue<string>("testimonialsTitle");
+            string introduction = homepage.GetPropertyValue("testimonialsIntroduction").ToString();
+
+            TestimonialsModel model = new TestimonialsModel(title, introduction);
+
+            return PartialView(PARTIAL_VIEW_FOLDER + "_Clients.cshtml", model);
         }
     }
 }

@@ -6,6 +6,6 @@
 <div id="fh5co-blog-section">
     <div class="container">
         @{ Html.RenderAction("RenderTitleControls", "SiteLayout"); }
-        @{ Html.RenderAction("RenderPostList", "Blog"); }
+        @{ Html.RenderAction("RenderPostList", "Blog", new { numberOfItems = 6 }); }
     </div>
 </div>
