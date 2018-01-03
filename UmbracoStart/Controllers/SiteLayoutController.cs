@@ -13,16 +13,19 @@ namespace UmbracoStart.Controllers
 {
     public class SiteLayoutController : SurfaceController
     {
-        private const string PARTIAL_VIEW_FOLDER = "~/Views/Partials/SiteLayout/";
+        private string PartialViewPath(string name)
+        {
+            return $"~/Views/Partials/SiteLayout/{name}.cshtml";
+        }
 
         public ActionResult RenderTitleControls()
         {
-            return PartialView(PARTIAL_VIEW_FOLDER + "_TitleControls.cshtml");
+            return PartialView(PartialViewPath("_TitleControls"));
         }
 
         public ActionResult RenderFooter()
         {
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Footer.cshtml");
+            return PartialView(PartialViewPath("_Footer"));
         }
 
         /// <summary>
@@ -32,7 +35,7 @@ namespace UmbracoStart.Controllers
         public ActionResult RenderHeader()
         {
             List<NavigationListItem> nav = GetObjectFromCache<List<NavigationListItem>>("mainNav", 5, GetNavigationModelFromDatabase);
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Header.cshtml", nav);
+            return PartialView(PartialViewPath("_Header"), nav);
         }
 
         /// <summary>
@@ -41,7 +44,7 @@ namespace UmbracoStart.Controllers
         /// <returns>A List of NavigationListItems, representing the structure of the site.</returns>
         private List<NavigationListItem> GetNavigationModelFromDatabase()
         {
-            IPublishedContent homePage = CurrentPage.AncestorOrSelf(1).DescendantsOrSelf().Where(x => x.DocumentTypeAlias == "home").FirstOrDefault();
+            IPublishedContent homePage = CurrentPage.AncestorOrSelf("home");
             List<NavigationListItem> nav = new List<NavigationListItem>();
             nav.Add(new NavigationListItem(new NavigationLink(homePage.Url, homePage.Name)));
             nav.AddRange(GetChildNavigationList(homePage));

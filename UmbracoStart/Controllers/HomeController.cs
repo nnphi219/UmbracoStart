@@ -11,18 +11,22 @@ namespace UmbracoStart.Controllers
 {
     public class HomeController : SurfaceController
     {
-        private const string PARTIAL_VIEW_FOLDER = "~/Views/Partials/Home/";
         private const int MAXIMUM_TESTIMONIAL = 4;
+
+        private string PartialViewPath(string name)
+        {
+            return $"~/Views/Partials/Home/{name}.cshtml";
+        }
 
         public ActionResult RenderIntro()
         {
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Intro.cshtml");
+            return PartialView(PartialViewPath("_Intro"));
         }
 
         public ActionResult RenderFeatured()
         {
             List<FeaturedItem> model = new List<FeaturedItem>();
-            IPublishedContent homePage = CurrentPage.AncestorOrSelf(1).DescendantsOrSelf().Where(x => x.DocumentTypeAlias == "home").FirstOrDefault();
+            IPublishedContent homePage = CurrentPage.AncestorOrSelf("home");
             ArchetypeModel featuredItems = homePage.GetPropertyValue<ArchetypeModel>("featuredItems");
 
             foreach (ArchetypeFieldsetModel fieldset in featuredItems)
@@ -40,12 +44,12 @@ namespace UmbracoStart.Controllers
                 model.Add(new FeaturedItem(fieldset.GetValue<string>("name"), fieldset.GetValue<string>("category"), imageUrl, linkUrl));
             }
 
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Featured.cshtml", model);
+            return PartialView(PartialViewPath("_Featured"), model);
         }
 
         public ActionResult RenderServices()
         {
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Services.cshtml");
+            return PartialView(PartialViewPath("_Services"));
         }
 
         public ActionResult RenderBlog()
@@ -56,7 +60,7 @@ namespace UmbracoStart.Controllers
 
             LatestBlogPosts model = new LatestBlogPosts(title, introduction);
 
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Blog.cshtml", model);
+            return PartialView(PartialViewPath("_Blog"), model);
         } 
 
         public ActionResult RenderTestimonials()
@@ -79,7 +83,7 @@ namespace UmbracoStart.Controllers
             }
 
             TestimonialsModel model = new TestimonialsModel(title, introduction, testimonials);
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Testimonials.cshtml", model);
+            return PartialView(PartialViewPath("_Testimonials"), model);
         }
     }
 }
