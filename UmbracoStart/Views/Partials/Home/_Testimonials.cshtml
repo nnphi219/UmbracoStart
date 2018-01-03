@@ -1,0 +1,27 @@
+﻿@model TestimonialsModel
+@using UmbracoStart.Models
+
+<div id="fh5co-client-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center fh5co-heading">
+                <h2>@Model.Title</h2>
+                @Html.Raw(Model.Introduction)
+            </div>
+        </div>
+        <div class="row">
+            @foreach (TestimonialModel testimonial in Model.Testimonials)
+             {
+                <div class="@(Model.ColumnClass) text-center">
+                    <div class="testimony">
+                        <span class="quote"><i class="icon-quote-right"></i></span>
+                        <blockquote>
+                            <p>@testimonial.Quote</p>
+                            <span>@testimonial.Name, via <a href="#" class="icon-twitter twitter-color"></a></span>
+                        </blockquote>
+                    </div>
+                </div>
+             }
+         </div>
+    </div>
+</div>

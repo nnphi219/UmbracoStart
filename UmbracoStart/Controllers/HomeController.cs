@@ -12,6 +12,7 @@ namespace UmbracoStart.Controllers
     public class HomeController : SurfaceController
     {
         private const string PARTIAL_VIEW_FOLDER = "~/Views/Partials/Home/";
+        private const int MAXIMUM_TESTIMONIAL = 4;
 
         public ActionResult RenderIntro()
         {
@@ -58,15 +59,27 @@ namespace UmbracoStart.Controllers
             return PartialView(PARTIAL_VIEW_FOLDER + "_Blog.cshtml", model);
         } 
 
-        public ActionResult RenderClients()
+        public ActionResult RenderTestimonials()
         {
             IPublishedContent homepage = CurrentPage.AncestorOrSelf("home");
             string title = homepage.GetPropertyValue<string>("testimonialsTitle");
             string introduction = homepage.GetPropertyValue("testimonialsIntroduction").ToString();
 
-            TestimonialsModel model = new TestimonialsModel(title, introduction);
+            List<TestimonialModel> testimonials = new List<TestimonialModel>();
 
-            return PartialView(PARTIAL_VIEW_FOLDER + "_Clients.cshtml", model);
+            ArchetypeModel testimonialList = homepage.GetPropertyValue<ArchetypeModel>("testimonialList");
+            if(testimonialList != null)
+            {
+                foreach (ArchetypeFieldsetModel testimonial in testimonialList.Take(MAXIMUM_TESTIMONIAL))
+                {
+                    string name = testimonial.GetValue<string>("name");
+                    string quote = testimonial.GetValue<string>("quote");
+                    testimonials.Add(new TestimonialModel(quote, name));
+                }
+            }
+
+            TestimonialsModel model = new TestimonialsModel(title, introduction, testimonials);
+            return PartialView(PARTIAL_VIEW_FOLDER + "_Testimonials.cshtml", model);
         }
     }
 }
