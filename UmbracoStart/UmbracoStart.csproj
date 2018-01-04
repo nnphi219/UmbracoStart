@@ -322,6 +322,13 @@
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery.easing.1.3.js" />
     <Content Include="scripts\jquery.min.js" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\jquery.waypoints.min.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
@@ -359,6 +366,9 @@
     <Content Include="Views\Partials\SiteLayout\_TitleControls.cshtml" />
     <Content Include="Views\Partials\Blog\_PostList.cshtml" />
     <Content Include="Views\BlogPost.cshtml" />
+    <Content Include="Views\Search.cshtml" />
+    <Content Include="Views\Partials\Search\_SearchForm.cshtml" />
+    <Content Include="Views\Partials\Search\_SearchResults.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -396,9 +406,15 @@
   <ItemGroup>
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SiteLayoutController.cs" />
+    <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="Models\BlogPreview.cs" />
     <Compile Include="Models\FeaturedItem.cs" />
+    <Compile Include="Models\Search\PagingBoundsModel.cs" />
+    <Compile Include="Models\Search\SearchResultsModel.cs" />
+    <Compile Include="Models\Search\SearchGroup.cs" />
+    <Compile Include="Models\Search\SearchViewModel.cs" />
     <Compile Include="Models\TestimonialModel.cs" />
     <Compile Include="Models\TestimonialsModel.cs" />
     <Compile Include="Models\LatestBlogPosts.cs" />

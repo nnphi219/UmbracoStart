@@ -8,7 +8,7 @@ using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
 [assembly: PureLiveAssembly]
-[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "5c498493bdda53c4")]
+[assembly:ModelsBuilderAssembly(PureLive = true, SourceHash = "bf32d5275eb9d1a9")]
 [assembly:System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
@@ -630,6 +630,9 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Article Intro</summary>
 		string ArticleIntro { get; }
+
+		/// <summary>Category</summary>
+		string Category { get; }
 	}
 
 	/// <summary>Article Controls</summary>
@@ -680,6 +683,18 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Article Intro</summary>
 		public static string GetArticleIntro(IArticleControls that) { return that.GetPropertyValue<string>("articleIntro"); }
+
+		///<summary>
+		/// Category: Choose the category for this article
+		///</summary>
+		[ImplementPropertyType("category")]
+		public string Category
+		{
+			get { return GetCategory(this); }
+		}
+
+		/// <summary>Static getter for Category</summary>
+		public static string GetCategory(IArticleControls that) { return that.GetPropertyValue<string>("category"); }
 	}
 
 	/// <summary>Blog Post</summary>
@@ -723,6 +738,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public string ArticleIntro
 		{
 			get { return Umbraco.Web.PublishedContentModels.ArticleControls.GetArticleIntro(this); }
+		}
+
+		///<summary>
+		/// Category: Choose the category for this article
+		///</summary>
+		[ImplementPropertyType("category")]
+		public string Category
+		{
+			get { return Umbraco.Web.PublishedContentModels.ArticleControls.GetCategory(this); }
 		}
 
 		///<summary>
@@ -888,6 +912,32 @@ namespace Umbraco.Web.PublishedContentModels
 
 		/// <summary>Static getter for Testimonials Title</summary>
 		public static string GetTestimonialsTitle(ITestimonialsControls that) { return that.GetPropertyValue<string>("testimonialsTitle"); }
+	}
+
+	/// <summary>Search</summary>
+	[PublishedContentModel("search")]
+	public partial class Search : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "search";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public Search(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Search, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
 	}
 
 	/// <summary>Folder</summary>
