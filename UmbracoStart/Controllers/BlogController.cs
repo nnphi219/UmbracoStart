@@ -22,8 +22,12 @@ namespace UmbracoStart.Controllers
             List<BlogPreview> model = new List<BlogPreview>();
             IPublishedContent homepage = CurrentPage.AncestorOrSelf("home");
             IPublishedContent blogPage = homepage.Children.Where(x => x.DocumentTypeAlias == "blog").FirstOrDefault();
+            //blogPage = homepage.Descendant("blog"); // solution 2
 
-            foreach (IPublishedContent page in blogPage.Children.OrderByDescending(x => x.UpdateDate).Take(numberOfItems))
+            var blogPosts = blogPage.Children.OrderByDescending(x => x.UpdateDate).Take(numberOfItems);
+            //blogPosts = blogPage.Descendants("blogPost").OrderByDescending(x => x.UpdateDate).Take(numberOfItems); // solution 2
+
+            foreach (IPublishedContent page in blogPosts)
             {
                 var mediaItem = page.GetPropertyValue<IPublishedContent>("articleImage");/* page.GetPropertyValue<int>("image");*/
                 string imageUrl = mediaItem.Url;
