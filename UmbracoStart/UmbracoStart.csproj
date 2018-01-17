@@ -1,4 +1,5 @@
 ﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\uSync.4.0.2\build\uSync.props" Condition="Exists('..\packages\uSync.4.0.2\build\uSync.props')" />
   <Import Project="..\packages\UmbracoCms.7.7.7\build\UmbracoCms.props" Condition="Exists('..\packages\UmbracoCms.7.7.7\build\UmbracoCms.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
@@ -92,6 +93,21 @@
     <Reference Include="interfaces, Version=1.0.6554.23582, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.7.7\lib\net45\interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Jumoo.uSync.BackOffice, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uSync.4.0.2\lib\net45\Jumoo.uSync.BackOffice.dll</HintPath>
+    </Reference>
+    <Reference Include="Jumoo.uSync.Content, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uSync.ContentEdition.4.1.0\lib\net45\Jumoo.uSync.Content.dll</HintPath>
+    </Reference>
+    <Reference Include="Jumoo.uSync.ContentMappers, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uSync.ContentMappers.4.1.0\lib\net45\Jumoo.uSync.ContentMappers.dll</HintPath>
+    </Reference>
+    <Reference Include="Jumoo.uSync.Core, Version=6.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uSync.Core.6.0.3\lib\net45\Jumoo.uSync.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Jumoo.uSync.Snapshots, Version=1.0.2.740, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\uSync.Snapshots.1.0.2.740\lib\net451\Jumoo.uSync.Snapshots.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.7.7\lib\net45\log4net.dll</HintPath>
     </Reference>
@@ -154,7 +170,7 @@
       <HintPath>..\packages\MySql.Data.6.9.10\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -264,6 +280,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\uSync.Content\uSyncDashboardContent.html" />
+    <Content Include="App_Plugins\uSync.Content\uSyncDashboardContentController.js" />
+    <Content Include="App_Plugins\uSyncSnapshots\snapshotdashboard.css" />
+    <Content Include="App_Plugins\uSyncSnapshots\SnapshotDashboard.html" />
+    <Content Include="App_Plugins\uSyncSnapshots\SnapshotDashboardController.js" />
+    <Content Include="App_Plugins\uSyncSnapshots\SnapshotDashboardService.js" />
+    <Content Include="App_Plugins\uSync\uSyncDashboard.css" />
+    <Content Include="App_Plugins\uSync\uSyncDashboard.html" />
+    <Content Include="App_Plugins\uSync\uSyncDashboardController.js" />
+    <Content Include="App_Plugins\uSync\uSyncDashboardService.js" />
     <Content Include="config\imageprocessor\security.config" />
     <Content Include="config\imageprocessor\processing.config" />
     <Content Include="config\imageprocessor\cache.config" />
@@ -271,6 +297,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\animate.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\icomoon.css" />
+    <Content Include="css\index.html" />
+    <Content Include="css\simple-line-icons.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\StylesDropdown.css" />
+    <Content Include="css\umbraco-starterkit-style.css" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\bootstrap\index.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -313,6 +347,14 @@
     <Content Include="fonts\simple-line-icons\Simple-Line-Icons.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="config\uSyncBackOffice.Config" />
+    <Content Include="App_Plugins\uSync\package.manifest" />
+    <Content Include="config\uSyncCore.Config" />
+    <Content Include="App_Plugins\uSync.Content\package.manifest" />
+    <Content Include="App_Plugins\uSyncSnapshots\package.manifest" />
+    <Content Include="css\.DS_Store" />
+    <Content Include="css\bootstrap.css.map" />
+    <Content Include="css\style.css.map" />
     <None Include="packages.config" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
@@ -369,6 +411,104 @@
     <Content Include="Views\Search.cshtml" />
     <Content Include="Views\Partials\Search\_SearchForm.cshtml" />
     <Content Include="Views\Partials\Search\_SearchResults.cshtml" />
+    <Content Include="uSync\data\DataType\approved-color\ApprovedColor.config" />
+    <Content Include="uSync\data\DataType\checkbox-list\CheckboxList.config" />
+    <Content Include="uSync\data\DataType\content-picker\ContentPicker.config" />
+    <Content Include="uSync\data\DataType\custom\category-dropdown\CategoryDropdown.config" />
+    <Content Include="uSync\data\DataType\custom\content-grid\ContentGrid.config" />
+    <Content Include="uSync\data\DataType\custom\featured-item-list\FeaturedItemList.config" />
+    <Content Include="uSync\data\DataType\custom\rich-text-editor-shorter\RichTextEditorShorter.config" />
+    <Content Include="uSync\data\DataType\custom\testimonial-list\TestimonialList.config" />
+    <Content Include="uSync\data\DataType\date-picker-with-time\DatePickerWithTime.config" />
+    <Content Include="uSync\data\DataType\date-picker\DatePicker.config" />
+    <Content Include="uSync\data\DataType\dropdown-multiple\DropdownMultiple.config" />
+    <Content Include="uSync\data\DataType\dropdown\Dropdown.config" />
+    <Content Include="uSync\data\DataType\image-cropper\ImageCropper.config" />
+    <Content Include="uSync\data\DataType\label\Label.config" />
+    <Content Include="uSync\data\DataType\list-view-content\ListViewContent.config" />
+    <Content Include="uSync\data\DataType\list-view-media\ListViewMedia.config" />
+    <Content Include="uSync\data\DataType\list-view-members\ListViewMembers.config" />
+    <Content Include="uSync\data\DataType\media-picker\MediaPicker.config" />
+    <Content Include="uSync\data\DataType\member-picker\MemberPicker.config" />
+    <Content Include="uSync\data\DataType\multiple-media-picker\MultipleMediaPicker.config" />
+    <Content Include="uSync\data\DataType\numeric\Numeric.config" />
+    <Content Include="uSync\data\DataType\radiobox\Radiobox.config" />
+    <Content Include="uSync\data\DataType\related-links\RelatedLinks.config" />
+    <Content Include="uSync\data\DataType\richtext-editor\RichtextEditor.config" />
+    <Content Include="uSync\data\DataType\tags\Tags.config" />
+    <Content Include="uSync\data\DataType\textarea\Textarea.config" />
+    <Content Include="uSync\data\DataType\textstring\Textstring.config" />
+    <Content Include="uSync\data\DataType\title-controls-title-textbox\TitleControlsTitleTextbox.config" />
+    <Content Include="uSync\data\DataType\true-false\Truefalse.config" />
+    <Content Include="uSync\data\DataType\upload\Upload.config" />
+    <Content Include="uSync\data\DictionaryItem\SearchPlaceholder.config" />
+    <Content Include="uSync\data\DocumentType\content\about\def.config" />
+    <Content Include="uSync\data\DocumentType\content\blog-post\def.config" />
+    <Content Include="uSync\data\DocumentType\content\blog\def.config" />
+    <Content Include="uSync\data\DocumentType\content\contact\def.config" />
+    <Content Include="uSync\data\DocumentType\content\home\def.config" />
+    <Content Include="uSync\data\DocumentType\content\portfolio\def.config" />
+    <Content Include="uSync\data\DocumentType\content\search\def.config" />
+    <Content Include="uSync\data\DocumentType\content\services\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\article-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\basic-content-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\featured-items-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\intro-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\latest-blog-posts-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\testimonials-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\title-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\core-types\top-navigation-controls\def.config" />
+    <Content Include="uSync\data\DocumentType\news-document\def.config" />
+    <Content Include="uSync\data\Languages\enUS.config" />
+    <Content Include="uSync\data\Languages\French.config" />
+    <Content Include="uSync\data\macro\renderUmbracoForm.config" />
+    <Content Include="uSync\data\MediaType\file\def.config" />
+    <Content Include="uSync\data\MediaType\folder\def.config" />
+    <Content Include="uSync\data\MediaType\image\def.config" />
+    <Content Include="uSync\data\Template\webbase\about\About.config" />
+    <Content Include="uSync\data\Template\webbase\blogpost\BlogPost.config" />
+    <Content Include="uSync\data\Template\webbase\blog\Blog.config" />
+    <Content Include="uSync\data\Template\webbase\contact\Contact.config" />
+    <Content Include="uSync\data\Template\webbase\home\Home.config" />
+    <Content Include="uSync\data\Template\webbase\portfolio\Portfolio.config" />
+    <Content Include="uSync\data\Template\webbase\search\Search.config" />
+    <Content Include="uSync\data\Template\webbase\services\Services.config" />
+    <Content Include="uSync\data\Template\webbase\WebBase.config" />
+    <Content Include="uSync\data\Template\_viewstart\ViewStart.config" />
+    <Content Include="Views\Partials\Contact\_Contact.cshtml" />
+    <Content Include="Views\Partials\User\_Users.cshtml" />
+    <Content Include="Views\UserManagement.cshtml" />
+    <Content Include="Views\Partials\User\_UserForm.cshtml" />
+    <Content Include="uSync\data\Content\homepage-fr\about\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\blog\beans-1\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\blog\beans\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\blog\bookmarksgrove-right-1\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\blog\bookmarksgrove-right\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\blog\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\blog\new-iphone-6-released-1\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\blog\new-iphone-6-released\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\contact\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\cookies\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\portfolio\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\search\content.config" />
+    <Content Include="uSync\data\Content\homepage-fr\services\content.config" />
+    <Content Include="uSync\data\Content\homepage\about\content.config" />
+    <Content Include="uSync\data\Content\homepage\blog\beans-1\content.config" />
+    <Content Include="uSync\data\Content\homepage\blog\beans\content.config" />
+    <Content Include="uSync\data\Content\homepage\blog\bookmarksgrove-right-1\content.config" />
+    <Content Include="uSync\data\Content\homepage\blog\bookmarksgrove-right\content.config" />
+    <Content Include="uSync\data\Content\homepage\blog\content.config" />
+    <Content Include="uSync\data\Content\homepage\blog\new-iphone-6-released-1\content.config" />
+    <Content Include="uSync\data\Content\homepage\blog\new-iphone-6-released\content.config" />
+    <Content Include="uSync\data\Content\homepage\contact\content.config" />
+    <Content Include="uSync\data\Content\homepage\content.config" />
+    <Content Include="uSync\data\Content\homepage\cookies\content.config" />
+    <Content Include="uSync\data\Content\homepage\portfolio\content.config" />
+    <Content Include="uSync\data\Content\homepage\search\content.config" />
+    <Content Include="uSync\data\Content\homepage\services\content.config" />
+    <Content Include="uSync\data\Content\homepage\user-management\content.config" />
+    <Content Include="uSync\data\Content\homepage\user-management\phi-nguyen\content.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -401,15 +541,23 @@
     <Content Include="config\Lang\zh-CN.user.xml" />
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PostApiController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SiteLayoutController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Entity\Student.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
+    <Compile Include="Models\AliasName.cs" />
     <Compile Include="Models\BlogPreview.cs" />
+    <Compile Include="Models\Contact\ContactModelView.cs" />
     <Compile Include="Models\FeaturedItem.cs" />
     <Compile Include="Models\Search\PagingBoundsModel.cs" />
     <Compile Include="Models\Search\SearchResultsModel.cs" />
@@ -420,6 +568,7 @@
     <Compile Include="Models\LatestBlogPosts.cs" />
     <Compile Include="Models\NavigationLink.cs" />
     <Compile Include="Models\NavigationListItem.cs" />
+    <Compile Include="Models\User\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -462,9 +611,12 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\UmbracoCms.7.7.7\build\UmbracoCms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.7.7.7\build\UmbracoCms.props'))" />
     <Error Condition="!Exists('..\packages\UmbracoCms.7.7.7\build\UmbracoCms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UmbracoCms.7.7.7\build\UmbracoCms.targets'))" />
+    <Error Condition="!Exists('..\packages\uSync.4.0.2\build\uSync.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\uSync.4.0.2\build\uSync.props'))" />
+    <Error Condition="!Exists('..\packages\uSync.4.0.2\build\uSync.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\uSync.4.0.2\build\uSync.targets'))" />
   </Target>
   <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <Import Project="..\packages\UmbracoCms.7.7.7\build\UmbracoCms.targets" Condition="Exists('..\packages\UmbracoCms.7.7.7\build\UmbracoCms.targets')" />
+  <Import Project="..\packages\uSync.4.0.2\build\uSync.targets" Condition="Exists('..\packages\uSync.4.0.2\build\uSync.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

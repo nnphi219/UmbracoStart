@@ -1,0 +1,16 @@
+{
+  "id": "aa60c45a-f63d-4122-941d-c6d24da637f0",
+  "name": "Send template email to nnphi219@gmail.com",
+  "form": "9fd39ef2-d5e1-4478-8515-5c77f2382ba7",
+  "active": true,
+  "workflowTypeId": "17c61629-d984-4e86-b43b-a8407b3efea9",
+  "executesOn": "Submitted",
+  "settings": {
+    "Email": "nnphi219@gmail.com",
+    "SenderEmail": "",
+    "Subject": "The Form '{form_name}' was submitted",
+    "RazorViewFilePath": "Forms/Emails/Example-Template.cshtml",
+    "Attachment": ""
+  },
+  "sortOrder": 1
+}

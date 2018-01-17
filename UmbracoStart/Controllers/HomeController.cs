@@ -4,6 +4,7 @@ using UmbracoStart.Models;
 using System.Collections.Generic;
 using Umbraco.Web;
 using Umbraco.Core.Models;
+using Umbraco.Core;
 using System.Linq;
 using Archetype.Models;
 
@@ -20,6 +21,7 @@ namespace UmbracoStart.Controllers
 
         public ActionResult RenderIntro()
         {
+            var test = ApplicationContext.Current.Services.ContentService.Count("");
             return PartialView(PartialViewPath("_Intro"));
         }
 
@@ -84,6 +86,13 @@ namespace UmbracoStart.Controllers
 
             TestimonialsModel model = new TestimonialsModel(title, introduction, testimonials);
             return PartialView(PartialViewPath("_Testimonials"), model);
+        }
+
+        private void CreateUser()
+        {
+            //var userType = Services.UserService.CreateUserWithIdentity()
+            var test = ApplicationContext.Current.Services;
+   
         }
     }
 }

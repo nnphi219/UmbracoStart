@@ -1,0 +1,8 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.UserManagement>
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "WebBase.cshtml";
+}
+
+@{ Html.RenderAction("RenderUsers", "User"); }
+@{ Html.RenderAction("RenderForm", "User"); }

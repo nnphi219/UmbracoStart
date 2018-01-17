@@ -1,0 +1,19 @@
+﻿@inherits UmbracoViewPage<ContactModelView>
+@using UmbracoStart.Models.Contact
+
+@using (Html.BeginUmbracoForm("SubmitForm", "Contact", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(m => m.Name)
+    @Html.TextBoxFor(m => m.Name)
+
+    @Html.LabelFor(m => m.EmailAddress)
+    @Html.TextBoxFor(m => m.EmailAddress)
+
+    @Html.LabelFor(m => m.Message)
+    @Html.TextBoxFor(m => m.Message)
+
+    <button>Submit</button>
+}
