@@ -1,26 +1,32 @@
 ﻿@inherits UmbracoViewPage<UserViewModel>
 @using UmbracoStart.Models.User
 
-@using (Html.BeginUmbracoForm("SubmitUser", "User", FormMethod.Post, new { @class = "login-form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary()
+<div id="CreateForm">
+    @using (Html.BeginUmbracoForm("SubmitUser", "User", FormMethod.Post, new { @class = "login-form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
 
-    <table>
-        <tr>
-            <td>@Html.LabelFor(m => m.FirstName)</td>
-            <td>@Html.TextBoxFor(m => m.FirstName)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m => m.LastName)</td>
-            <td>@Html.TextBoxFor(m => m.LastName)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(m => m.EmailAddress)</td>
-            <td>@Html.TextBoxFor(m => m.EmailAddress)</td>
-        </tr>
-        <tr>
-            <td colspan="2"><button type="submit">Submit</button></td>
-        </tr>
-    </table>
-}
+        <table>
+            <tr>
+                <td>@Html.LabelFor(m => m.Id)</td>
+                <td>@Html.TextBoxFor(m => m.Id, new { @type = "number" })</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.FirstName)</td>
+                <td>@Html.TextBoxFor(m => m.FirstName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.LastName)</td>
+                <td>@Html.TextBoxFor(m => m.LastName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(m => m.EmailAddress)</td>
+                <td>@Html.TextBoxFor(m => m.EmailAddress)</td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Submit</button></td>
+            </tr>
+        </table>
+    }
+</div>

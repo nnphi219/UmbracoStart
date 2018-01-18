@@ -4,6 +4,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
+            <td>Id</td>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
@@ -14,6 +15,7 @@
         @foreach (var user in Model)
         {
             <tr>
+                <td>@user.Id</td>
                 <td>@user.FirstName</td>
                 <td>@user.LastName</td>
                 <td>@user.EmailAddress</td>

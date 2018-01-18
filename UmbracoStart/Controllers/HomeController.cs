@@ -41,7 +41,7 @@ namespace UmbracoStart.Controllers
                 //int pageId = fieldset.GetValue<int>("page");
                 //IPublishedContent linkedToPage = Umbraco.TypedContent(pageId);
                 var linkedToPage = fieldset.GetValue<IPublishedContent>("page");
-                string linkUrl = linkedToPage.Url;
+                string linkUrl = linkedToPage.Url; 
 
                 model.Add(new FeaturedItem(fieldset.GetValue<string>("name"), fieldset.GetValue<string>("category"), imageUrl, linkUrl));
             }

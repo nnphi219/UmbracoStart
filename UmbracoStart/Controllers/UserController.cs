@@ -5,7 +5,9 @@ using UmbracoStart.Models.User;
 using Umbraco.Core;
 using Umbraco.Core.Services;
 using System.Linq;
-using UmbracoStart.Models;
+using Umbraco.Core.Models;
+using Umbraco.Web;
+using UmbracoStart.Global;
 
 namespace UmbracoStart.Controllers
 {
@@ -26,7 +28,7 @@ namespace UmbracoStart.Controllers
         public ActionResult RenderUsers()
         {
             List<UserViewModel> model = new List<UserViewModel>();
-
+            
             var users = _contentService.GetChildren(CurrentPage.Id).ToList();
 
             foreach (var user in users)
@@ -39,7 +41,23 @@ namespace UmbracoStart.Controllers
                     EmailAddress = user.GetValue<string>("emailAddress")
                 });
             }
-            
+
+            IPublishedContent homePage = CurrentPage.AncestorOrSelf("home");
+            IPublishedContent userManagement = homePage.Children.Where(x => x.DocumentTypeAlias == AliasName.USER_MANAGEMENT).FirstOrDefault();
+
+            var users2 = userManagement.Children.ToList();
+
+            foreach (var user in users2)
+            {
+                model.Add(new UserViewModel
+                {
+                    Id = user.Id,
+                    FirstName = user.GetPropertyValue<string>("firstName"),
+                    LastName = user.GetPropertyValue<string>("lastName"),
+                    EmailAddress = user.GetPropertyValue<string>("emailAddress")
+                });
+            }
+
             return PartialView(PartialViewPath("_Users"), model);
         }
 
@@ -47,14 +65,20 @@ namespace UmbracoStart.Controllers
         {
             return PartialView(PartialViewPath("_UserForm"));
         }
-
-        [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public ActionResult SubmitUser(UserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                SaveUser(model);
+                var userContent = _contentService.GetById(model.Id);
+                if(userContent == null)
+                {
+                    userContent = _contentService.CreateContent(string.Format("{0} {1}", model.FirstName, model.LastName),
+                                                            CurrentPage.Id, AliasName.USER);
+                }
+                SaveUser(userContent, model);
+
                 return RedirectToCurrentUmbracoPage();
             }
             return CurrentUmbracoPage();
@@ -68,24 +92,36 @@ namespace UmbracoStart.Controllers
                 if (user != null)
                 {
                     _contentService.Delete(user);
-                }
-                
-                
-            }
 
+                }
+            }
             
             return Redirect("/user-management");
         }
 
-        private void SaveUser(UserViewModel user)
+        private void SaveUser(IContent userContent, UserViewModel user)
         {
-            var contentUser = _contentService.CreateContent(string.Format("{0} {1}", user.FirstName, user.LastName),
-                                                            CurrentPage.Id, AliasName.USER);
-            contentUser.SetValue("firstName", user.FirstName);
-            contentUser.SetValue("lastName", user.LastName);
-            contentUser.SetValue("emailAddress", user.EmailAddress);
+            userContent.SetValue("firstName", user.FirstName);
+            userContent.SetValue("lastName", user.LastName);
+            userContent.SetValue("emailAddress", user.EmailAddress);
 
-            _contentService.SaveAndPublish(contentUser);
+            _contentService.SaveAndPublish(userContent);
+        }
+
+        private void CreateUser(UserViewModel user)
+        {
+            var userContent = _contentService.CreateContent(string.Format("{0} {1}", user.FirstName, user.LastName),
+                                                            CurrentPage.Id, AliasName.USER);
+            SaveUser(userContent, user);
+        }
+
+        private void UpdateUser(UserViewModel user)
+        {
+            var userContent = _contentService.GetById(user.Id);
+            if (userContent != null)
+            {
+                SaveUser(userContent, user);
+            }
         }
     }
 }

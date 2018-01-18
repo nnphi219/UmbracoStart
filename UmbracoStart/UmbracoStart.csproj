@@ -96,17 +96,11 @@
     <Reference Include="Jumoo.uSync.BackOffice, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\uSync.4.0.2\lib\net45\Jumoo.uSync.BackOffice.dll</HintPath>
     </Reference>
-    <Reference Include="Jumoo.uSync.Content, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uSync.ContentEdition.4.1.0\lib\net45\Jumoo.uSync.Content.dll</HintPath>
-    </Reference>
     <Reference Include="Jumoo.uSync.ContentMappers, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\uSync.ContentMappers.4.1.0\lib\net45\Jumoo.uSync.ContentMappers.dll</HintPath>
     </Reference>
     <Reference Include="Jumoo.uSync.Core, Version=6.0.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\uSync.Core.6.0.3\lib\net45\Jumoo.uSync.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Jumoo.uSync.Snapshots, Version=1.0.2.740, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\uSync.Snapshots.1.0.2.740\lib\net451\Jumoo.uSync.Snapshots.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.7.7\lib\net45\log4net.dll</HintPath>
@@ -280,12 +274,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\uSync.Content\uSyncDashboardContent.html" />
-    <Content Include="App_Plugins\uSync.Content\uSyncDashboardContentController.js" />
-    <Content Include="App_Plugins\uSyncSnapshots\snapshotdashboard.css" />
-    <Content Include="App_Plugins\uSyncSnapshots\SnapshotDashboard.html" />
-    <Content Include="App_Plugins\uSyncSnapshots\SnapshotDashboardController.js" />
-    <Content Include="App_Plugins\uSyncSnapshots\SnapshotDashboardService.js" />
     <Content Include="App_Plugins\uSync\uSyncDashboard.css" />
     <Content Include="App_Plugins\uSync\uSyncDashboard.html" />
     <Content Include="App_Plugins\uSync\uSyncDashboardController.js" />
@@ -350,8 +338,6 @@
     <Content Include="config\uSyncBackOffice.Config" />
     <Content Include="App_Plugins\uSync\package.manifest" />
     <Content Include="config\uSyncCore.Config" />
-    <Content Include="App_Plugins\uSync.Content\package.manifest" />
-    <Content Include="App_Plugins\uSyncSnapshots\package.manifest" />
     <Content Include="css\.DS_Store" />
     <Content Include="css\bootstrap.css.map" />
     <Content Include="css\style.css.map" />
@@ -508,7 +494,6 @@
     <Content Include="uSync\data\Content\homepage\search\content.config" />
     <Content Include="uSync\data\Content\homepage\services\content.config" />
     <Content Include="uSync\data\Content\homepage\user-management\content.config" />
-    <Content Include="uSync\data\Content\homepage\user-management\phi-nguyen\content.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -555,7 +540,7 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entity\Student.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
-    <Compile Include="Models\AliasName.cs" />
+    <Compile Include="Global\AliasName.cs" />
     <Compile Include="Models\BlogPreview.cs" />
     <Compile Include="Models\Contact\ContactModelView.cs" />
     <Compile Include="Models\FeaturedItem.cs" />
@@ -575,7 +560,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.1.0.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DocumentTypes\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
