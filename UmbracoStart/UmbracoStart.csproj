@@ -75,6 +75,12 @@
     <Reference Include="controls, Version=1.0.6554.23595, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.7.7\lib\net45\controls.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Examine, Version=0.1.88.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Examine.0.1.88\lib\net45\Examine.dll</HintPath>
     </Reference>
@@ -538,7 +544,8 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SiteLayoutController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Entity\Student.cs" />
+    <Compile Include="Global\Entity\CustomerEntity.cs" />
+    <Compile Include="Global\UmbracoStartContext.cs" />
     <Compile Include="Helpers\SearchHelper.cs" />
     <Compile Include="Global\AliasName.cs" />
     <Compile Include="Models\BlogPreview.cs" />
@@ -554,6 +561,8 @@
     <Compile Include="Models\NavigationLink.cs" />
     <Compile Include="Models\NavigationListItem.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />
+    <Compile Include="PetaPoco\Entity\PPUserEntity.cs" />
+    <Compile Include="PetaPoco\RegisterEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

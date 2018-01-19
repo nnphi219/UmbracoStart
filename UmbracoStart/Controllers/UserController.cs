@@ -8,6 +8,8 @@ using System.Linq;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using UmbracoStart.Global;
+using UmbracoStart.PetaPoco.Entity;
+using Umbraco.Core.Persistence;
 
 namespace UmbracoStart.Controllers
 {
@@ -24,12 +26,12 @@ namespace UmbracoStart.Controllers
         {
             return $"~/Views/Partials/User/{name}.cshtml";
         }
-        
+
         public ActionResult RenderUsers()
         {
             List<UserViewModel> model = new List<UserViewModel>();
-            
-            var users = _contentService.GetChildren(CurrentPage.Id).ToList();
+
+            var users = _contentService.GetChildren(CurrentPage.Id).Where(x => x.ContentType.Alias == AliasName.USER).ToList();
 
             foreach (var user in users)
             {
@@ -44,19 +46,41 @@ namespace UmbracoStart.Controllers
 
             IPublishedContent homePage = CurrentPage.AncestorOrSelf("home");
             IPublishedContent userManagement = homePage.Children.Where(x => x.DocumentTypeAlias == AliasName.USER_MANAGEMENT).FirstOrDefault();
-
             var users2 = userManagement.Children.ToList();
 
-            foreach (var user in users2)
-            {
-                model.Add(new UserViewModel
-                {
-                    Id = user.Id,
-                    FirstName = user.GetPropertyValue<string>("firstName"),
-                    LastName = user.GetPropertyValue<string>("lastName"),
-                    EmailAddress = user.GetPropertyValue<string>("emailAddress")
-                });
-            }
+            //foreach (var user in users2)
+            //{
+            //    model.Add(new UserViewModel
+            //    {
+            //        Id = user.Id,
+            //        FirstName = user.GetPropertyValue<string>("firstName"),
+            //        LastName = user.GetPropertyValue<string>("lastName"),
+            //        EmailAddress = user.GetPropertyValue<string>("emailAddress")
+            //    });
+            //}
+
+            var db = ApplicationContext.DatabaseContext.Database;
+            //var ppUser = new PPUserEntity
+            //{
+            //    FirstName = "Hung",
+            //    LastName = "Pham",
+            //    EmailAddress = "hungpham@gmail.com"
+            //};
+            
+            //db.Insert(ppUser);
+            var query = new Sql().From("PetaPocoUser");
+            var ppUsers = db.Fetch<PPUserEntity>(query);
+
+            //foreach (var user in ppUsers)
+            //{
+            //    model.Add(new UserViewModel
+            //    {
+            //        Id = user.Id,
+            //        FirstName = user.FirstName,
+            //        LastName = user.LastName,
+            //        EmailAddress = user.EmailAddress
+            //    });
+            //}
 
             return PartialView(PartialViewPath("_Users"), model);
         }
@@ -91,6 +115,7 @@ namespace UmbracoStart.Controllers
                 var user = _contentService.GetById((int)id);
                 if (user != null)
                 {
+                    _contentService.UnPublish(user);
                     _contentService.Delete(user);
 
                 }
