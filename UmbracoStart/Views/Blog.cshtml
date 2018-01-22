@@ -9,3 +9,18 @@
         @{ Html.RenderAction("RenderPostList", "Blog", new { numberOfItems = 6 }); }
     </div>
 </div>
+
+
+@{
+	var selection = Model.Content.Site().FirstChild("blog").Children("blogPost")
+						.Where(x => x.IsVisible())
+						.OrderBy("CreateDate desc");
+}
+<ul>
+	@foreach(var item in selection){
+		<li>
+			<a href="@item.Url">@item.Name</a>
+		</li>
+	}
+</ul>
+

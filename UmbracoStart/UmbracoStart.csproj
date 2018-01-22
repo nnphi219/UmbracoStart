@@ -347,6 +347,7 @@
     <Content Include="css\.DS_Store" />
     <Content Include="css\bootstrap.css.map" />
     <Content Include="css\style.css.map" />
+    <Content Include="Dashboard.config" />
     <None Include="packages.config" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
